@@ -87,7 +87,7 @@ stages:
   condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/develop'))
   variables:
     ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
-      environment: 'prod'
+      environment: 'dev'
     ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/master') }}:
       environment: 'dev'
   jobs:
