@@ -77,7 +77,7 @@ stages:
 - stage: Plan_app_service
   dependsOn: Init
   jobs:
-  - job: Plan_app_service
+  - job: Plan
     steps:
     - template: download-terragrunt.yaml
 
@@ -90,19 +90,19 @@ stages:
     - task: Bash@3
       inputs:
         filePath: './scripts/terragrunt-plan.sh'
-        arguments: 'plan_app_service.log'
+        arguments: 'plan.log'
       displayName: 'Run terragrunt plan-all'
 
     - task: CopyFiles@2
       inputs:
-        contents: 'plan_app_service.log'
+        contents: 'plan.log'
         targetFolder: $(Build.ArtifactStagingDirectory)
       displayName: 'Copy plan to artifact staging directory'
 
     - task: PublishPipelineArtifact@0
       inputs:
         targetPath: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'Plan_app_service'
+        ArtifactName: 'Plan'
       displayName: 'Publish Plan Artifact'
 
 # ---------------------------------------------------------------------------------------------------------------------
