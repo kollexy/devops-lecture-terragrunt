@@ -49,7 +49,7 @@ stages:
     steps:
     - template: download-terragrunt.yaml
 
-    - script: terragrunt run-all validate --terragrunt-working-dir live/dev/west-europe/resource_group/
+    - script: terragrunt run-all validate --terragrunt-working-dir live/
       displayName: 'Run terragrunt run-all validate'
 
     - script: chmod +x ./scripts/terragrunt-plan.sh
