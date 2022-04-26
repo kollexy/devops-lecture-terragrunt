@@ -42,10 +42,10 @@ stages:
 # first need to download terragrunt.
 # ---------------------------------------------------------------------------------------------------------------------
 
-- stage: Plan
+- stage: Plan-rg
   dependsOn: Init
   jobs:
-  - job: Plan
+  - job: Plan-rg
     steps:
     - template: download-terragrunt.yaml
 
@@ -58,19 +58,51 @@ stages:
     - task: Bash@3
       inputs:
         filePath: './scripts/terragrunt-plan.sh'
-        arguments: 'plan.log'
+        arguments: 'plan-rg.log'
       displayName: 'Run terragrunt plan-all'
 
     - task: CopyFiles@2
       inputs:
-        contents: 'plan.log'
+        contents: 'plan-rg.log'
         targetFolder: $(Build.ArtifactStagingDirectory)
       displayName: 'Copy plan to artifact staging directory'
 
     - task: PublishPipelineArtifact@0
       inputs:
         targetPath: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'Plan'
+        ArtifactName: 'Plan-rg'
+      displayName: 'Publish Plan Artifact'
+
+
+- stage: Plan-app-service
+  dependsOn: Init
+  jobs:
+  - job: Plan-app-service
+    steps:
+    - template: download-terragrunt.yaml
+
+    - script: terragrunt validate-all --terragrunt-working-dir live/dev/west-europe/showcase_backend/app_service/
+      displayName: 'Run terragrunt validate-all'
+
+    - script: chmod +x ./scripts/terragrunt-plan.sh
+      displayName: 'Enable script permissions'
+
+    - task: Bash@3
+      inputs:
+        filePath: './scripts/terragrunt-plan.sh'
+        arguments: 'plan-app-service.log'
+      displayName: 'Run terragrunt plan-all'
+
+    - task: CopyFiles@2
+      inputs:
+        contents: 'plan-app-service.log'
+        targetFolder: $(Build.ArtifactStagingDirectory)
+      displayName: 'Copy plan to artifact staging directory'
+
+    - task: PublishPipelineArtifact@0
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'Plan-app-service'
       displayName: 'Publish Plan Artifact'
 
 # ---------------------------------------------------------------------------------------------------------------------
