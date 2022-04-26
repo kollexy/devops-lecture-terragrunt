@@ -95,14 +95,14 @@ stages:
 
     - task: CopyFiles@2
       inputs:
-        contents: 'plan-app-service.log'
+        contents: 'plan_app_service.log'
         targetFolder: $(Build.ArtifactStagingDirectory)
       displayName: 'Copy plan to artifact staging directory'
 
     - task: PublishPipelineArtifact@0
       inputs:
         targetPath: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'Plan-app-service'
+        ArtifactName: 'Plan_app_service'
       displayName: 'Publish Plan Artifact'
 
 # ---------------------------------------------------------------------------------------------------------------------
