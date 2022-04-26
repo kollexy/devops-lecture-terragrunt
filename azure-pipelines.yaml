@@ -42,10 +42,10 @@ stages:
 # first need to download terragrunt.
 # ---------------------------------------------------------------------------------------------------------------------
 
-- stage: Plan-rg
+- stage: Plan_rg
   dependsOn: Init
   jobs:
-  - job: Plan-rg
+  - job: Plan_rg
     steps:
     - template: download-terragrunt.yaml
 
@@ -58,7 +58,7 @@ stages:
     - task: Bash@3
       inputs:
         filePath: './scripts/terragrunt-plan.sh'
-        arguments: 'plan-rg.log'
+        arguments: 'plan_rg.log'
       displayName: 'Run terragrunt plan-all'
 
     - task: CopyFiles@2
@@ -70,14 +70,14 @@ stages:
     - task: PublishPipelineArtifact@0
       inputs:
         targetPath: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'Plan-rg'
+        ArtifactName: 'Plan_rg'
       displayName: 'Publish Plan Artifact'
 
 
-- stage: Plan-app-service
+- stage: Plan_app_service
   dependsOn: Init
   jobs:
-  - job: Plan-app-service
+  - job: Plan_app_service
     steps:
     - template: download-terragrunt.yaml
 
@@ -90,7 +90,7 @@ stages:
     - task: Bash@3
       inputs:
         filePath: './scripts/terragrunt-plan.sh'
-        arguments: 'plan-app-service.log'
+        arguments: 'plan_app_service.log'
       displayName: 'Run terragrunt plan-all'
 
     - task: CopyFiles@2
