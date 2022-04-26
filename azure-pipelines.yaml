@@ -49,8 +49,8 @@ stages:
     steps:
     - template: download-terragrunt.yaml
 
-    - script: terragrunt validate-all --terragrunt-working-dir live/dev/west-europe/resource_group/
-      displayName: 'Run terragrunt validate-all'
+    - script: terragrunt run-all validate --terragrunt-working-dir live/dev/west-europe/resource_group/
+      displayName: 'Run terragrunt run-all validate'
 
     - script: chmod +x ./scripts/terragrunt-plan.sh
       displayName: 'Enable script permissions'
@@ -81,7 +81,7 @@ stages:
     steps:
     - template: download-terragrunt.yaml
 
-    - script: terragrunt validate-all --terragrunt-working-dir live/dev/west-europe/showcase_backend/app_service/
+    - script: terragrunt run-all validate --terragrunt-working-dir live/dev/west-europe/showcase_backend/app_service/
       displayName: 'Run terragrunt validate-all'
 
     - script: chmod +x ./scripts/terragrunt-plan.sh
