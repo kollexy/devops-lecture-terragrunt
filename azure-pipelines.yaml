@@ -115,7 +115,7 @@ stages:
 # ---------------------------------------------------------------------------------------------------------------------
 
 - stage: Apply
-  dependsOn: Plan
+  dependsOn: Plan_rg
   condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/develop'))
   variables:
     ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
