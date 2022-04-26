@@ -42,47 +42,15 @@ stages:
 # first need to download terragrunt.
 # ---------------------------------------------------------------------------------------------------------------------
 
-- stage: Plan_rg
-  dependsOn: Init
-  jobs:
-  - job: Plan_rg
-    steps:
-    - template: download-terragrunt.yaml
-
-    - script: terragrunt run-all validate --terragrunt-working-dir live/dev/west-europe/resource_group/
-      displayName: 'Run terragrunt run-all validate'
-
-    - script: chmod +x ./scripts/terragrunt-plan.sh
-      displayName: 'Enable script permissions'
-
-    - task: Bash@3
-      inputs:
-        filePath: './scripts/terragrunt-plan.sh'
-        arguments: 'plan_rg.log'
-      displayName: 'Run terragrunt plan-all'
-
-    - task: CopyFiles@2
-      inputs:
-        contents: 'plan-rg.log'
-        targetFolder: $(Build.ArtifactStagingDirectory)
-      displayName: 'Copy plan to artifact staging directory'
-
-    - task: PublishPipelineArtifact@0
-      inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'Plan_rg'
-      displayName: 'Publish Plan Artifact'
-
-
-- stage: Plan_app_service
+- stage: Plan
   dependsOn: Init
   jobs:
   - job: Plan
     steps:
     - template: download-terragrunt.yaml
 
-    - script: terragrunt run-all validate --terragrunt-working-dir live/dev/west-europe/showcase_backend/app_service/
-      displayName: 'Run terragrunt validate-all'
+    - script: terragrunt run-all validate --terragrunt-working-dir live/dev/west-europe/resource_group/
+      displayName: 'Run terragrunt run-all validate'
 
     - script: chmod +x ./scripts/terragrunt-plan.sh
       displayName: 'Enable script permissions'
@@ -104,6 +72,8 @@ stages:
         targetPath: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'Plan'
       displayName: 'Publish Plan Artifact'
+
+
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Apply stage
