@@ -54,7 +54,7 @@ stages:
   - job: InitRemoteState
     steps:    
     - script: |
-        chmod +x ./scripts/backend.sh {{ parameters.REMOTE_STATE_LOCATION }}
+        chmod +x ./scripts/backend.sh {{ parameters.REMOTE_STATE_LOCATION }} $REMOTE_STATE_RESOURCE_GROUP $REMOTE_STATE_STORAGE_ACCOUNT $REMOTE_STATE_STORAGE_CONTAINER
       displayName: 'Enable script permissions'
 
     - task: Bash@3
