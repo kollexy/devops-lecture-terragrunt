@@ -23,8 +23,8 @@ REMOTE_STATE_STORAGE_CONTAINER=$4
 az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
 
 # Set default values for resource group and location so we don't have to repeat them
-az configure --defaults location=$REMOTE_STATE_LOCATION
-az configure --defaults group=$REMOTE_STATE_RESOURCE_GROUP
+#  az configure --defaults location=$REMOTE_STATE_LOCATION
+#  az configure --defaults group=$REMOTE_STATE_RESOURCE_GROUP
 
 # Create a resource group for our remote state if it doesn't exist
 if [ $(az group exists --name $REMOTE_STATE_RESOURCE_GROUP) = false ]; then
