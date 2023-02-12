@@ -13,10 +13,10 @@
 
 #!/usr/bin/env bash
 set -euo pipefail
-REMOTE_STATE_LOCATION={{ parameters.REMOTE_STATE_LOCATION }}
-REMOTE_STATE_RESOURCE_GROUP="$REMOTE_STATE_LOCATION{{ parameters.teamname }} {{ parameters.environment }}-rg"
-REMOTE_STATE_STORAGE_ACCOUNT="$REMOTE_STATE_LOCATION{{ parameters.teamname }}{{ parameters.environment }}"
-REMOTE_STATE_STORAGE_CONTAINER="$REMOTE_STATE_LOCATION{{ parameters.teamname }} {{ parameters.environment }}{{ parameters.module }}"
+REMOTE_STATE_LOCATION=$1
+REMOTE_STATE_RESOURCE_GROUP=$2
+REMOTE_STATE_STORAGE_ACCOUNT=$3
+REMOTE_STATE_STORAGE_CONTAINER=$4
 
 
 # Login into Azure using a service principal
