@@ -12,10 +12,10 @@ parameters:
   - name: REMOTE_STATE_LOCATION
     displayName: 
     type: string
-    default: UKSOUTH
+    default: uksouth
     values:  
-    - UKSOUTH
-    - UKWEST
+    - uksouth
+    - ukwest
   - name: module
     displayName: 'Infra to be created'  
     default: storageaccount
