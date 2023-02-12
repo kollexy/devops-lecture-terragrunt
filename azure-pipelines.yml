@@ -62,5 +62,5 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: './scripts/backend.sh "${{ parameters.REMOTE_STATE_LOCATION }}" "${{ variables.REMOTE_STATE_RESOURCE_GROUP }}" "${{ variables.REMOTE_STATE_STORAGE_ACCOUNT }}" "${{ variables.REMOTE_STATE_STORAGE_CONTAINER }}"'
+        script: './scripts/backend.sh "${{ parameters.REMOTE_STATE_LOCATION }}" "$(REMOTE_STATE_RESOURCE_GROUP)" "$(REMOTE_STATE_STORAGE_ACCOUNT)" "$(REMOTE_STATE_STORAGE_CONTAINER)"'
       displayName: 'Init remote state'
