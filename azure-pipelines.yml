@@ -33,11 +33,11 @@ variables:
 - group: ARM-SUBSCRIPTION
 - name: teamname
 - name: REMOTE_STATE_RESOURCE_GROUP
-  value: "{{ parameters.REMOTE_STATE_LOCATION }}{{ parameters.environment }}{{ parameters.environment }}-devrg"
+  value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ parameters.environment }}${{ parameters.environment }}-rg"
 - name: REMOTE_STATE_STORAGE_ACCOUNT
-  value: "{{ parameters.REMOTE_STATE_LOCATION }}{{ parameters.environment }}{{ parameters.environment }}"
+  value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ parameters.environment }}${{ parameters.environment }}"
 - name: REMOTE_STATE_STORAGE_CONTAINER
-  value: "{{ parameters.REMOTE_STATE_LOCATION }}{{ parameters.environment }}{{ parameters.environment }}_container"
+  value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ parameters.environment }}${{ parameters.environment }}_container"
 
 stages:
 
@@ -62,5 +62,5 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: './scripts/backend.sh "{{ parameters.REMOTE_STATE_LOCATION }}" "{{ variables.REMOTE_STATE_RESOURCE_GROUP }}" "{{ variables.REMOTE_STATE_STORAGE_ACCOUNT }}" "{{ variables.REMOTE_STATE_STORAGE_CONTAINER }}"'
+        script: './scripts/backend.sh "${{ parameters.REMOTE_STATE_LOCATION }}" "${{ variables.REMOTE_STATE_RESOURCE_GROUP }}" "${{ variables.REMOTE_STATE_STORAGE_ACCOUNT }}" "${{ variables.REMOTE_STATE_STORAGE_CONTAINER }}"'
       displayName: 'Init remote state'
