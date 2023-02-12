@@ -59,7 +59,7 @@ stages:
 
     - task: Bash@3
       inputs:
-        filePath: './scripts/backend.sh {{ parameters.REMOTE_STATE_LOCATION }} {{ variables.REMOTE_STATE_RESOURCE_GROUP }} {{ variables.REMOTE_STATE_STORAGE_ACCOUNT }} {{ variables.REMOTE_STATE_STORAGE_CONTAINER }}'
+        filePath: ./scripts/backend.sh {{ parameters.REMOTE_STATE_LOCATION }} {{ variables.REMOTE_STATE_RESOURCE_GROUP }} {{ variables.REMOTE_STATE_STORAGE_ACCOUNT }} {{ variables.REMOTE_STATE_STORAGE_CONTAINER }}
       displayName: 'Init remote state'
 
 
