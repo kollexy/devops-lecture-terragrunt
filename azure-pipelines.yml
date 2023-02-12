@@ -48,12 +48,12 @@ stages:
   - job: InitRemoteState
     steps:    
     - script: |
-        chmod +x ./scripts/remote.sh
+        chmod +x ./scripts/backend.sh
       displayName: 'Enable script permissions'
 
     - task: Bash@3
       inputs:
-        filePath: './scripts/remote.sh'
+        filePath: './scripts/backend.sh'
       displayName: 'Init remote state'
 
 
