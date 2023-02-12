@@ -32,6 +32,12 @@ parameters:
 variables:
 - group: ARM-SUBSCRIPTION
 - name: teamname
+- name: REMOTE_STATE_RESOURCE_GROUP
+  value: "{{ parameters.REMOTE_STATE_LOCATION }}{{ parameters.environment }}{{ parameters.environment }}-rg"
+- name: REMOTE_STATE_STORAGE_ACCOUNT
+  value: "{{ parameters.REMOTE_STATE_LOCATION }}{{ parameters.environment }}{{ parameters.environment }}"
+- name: REMOTE_STATE_STORAGE_CONTAINER
+  value: "{{ parameters.REMOTE_STATE_LOCATION }}{{ parameters.environment }}{{ parameters.environment }}_container"
 
 stages:
 
@@ -48,7 +54,7 @@ stages:
   - job: InitRemoteState
     steps:    
     - script: |
-        chmod +x ./scripts/backend.sh
+        chmod +x ./scripts/backend.sh {{ parameters.REMOTE_STATE_LOCATION }}
       displayName: 'Enable script permissions'
 
     - task: Bash@3
