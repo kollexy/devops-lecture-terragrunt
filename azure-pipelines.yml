@@ -1,0 +1,59 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- none
+pool:
+  vmImage: 'ubuntu-latest'
+
+parameters:
+  - name: REMOTE_STATE_LOCATION
+    displayName: 
+    type: string
+    default: UKSOUTH
+    values:  
+    - UKSOUTH
+    - UKWEST
+  - name: module
+    displayName: 'Infra to be created'  
+    default: storageaccount
+    values:  
+    - keyvault
+    - appgateway  
+  - name: environment
+    displayName: 
+    default: QA
+    values:  
+    - DEV
+    - PROD      
+
+variables:
+- group: ARM-SUBSCRIPTION
+- name: teamname
+
+stages:
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Initalization stage
+#
+# Initialize a resource group with a storage account and a container that will be used as remote state.
+# Terraform needs to store it's state somewhere to keep track of the infrastructure, with this stage we ensure that
+# the remote state will be created.
+# ---------------------------------------------------------------------------------------------------------------------
+
+- stage: Init
+  jobs:
+  - job: InitRemoteState
+    steps:    
+    - script: |
+        chmod +x ./scripts/remote.sh
+      displayName: 'Enable script permissions'
+
+    - task: Bash@3
+      inputs:
+        filePath: './scripts/remote.sh'
+      displayName: 'Init remote state'
+
+
