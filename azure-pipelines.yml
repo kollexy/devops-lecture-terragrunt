@@ -57,9 +57,10 @@ stages:
         chmod +x ./scripts/backend.sh 
       displayName: 'Enable script permissions'
 
+   
+
     - task: Bash@3
       inputs:
-        filePath: ./scripts/backend.sh {{ parameters.REMOTE_STATE_LOCATION }} {{ variables.REMOTE_STATE_RESOURCE_GROUP }} {{ variables.REMOTE_STATE_STORAGE_ACCOUNT }} {{ variables.REMOTE_STATE_STORAGE_CONTAINER }}
+        targetType: 'inline'
+        script: './scripts/backend.sh {{ parameters.REMOTE_STATE_LOCATION }} {{ variables.REMOTE_STATE_RESOURCE_GROUP }} {{ variables.REMOTE_STATE_STORAGE_ACCOUNT }} {{ variables.REMOTE_STATE_STORAGE_CONTAINER }}'
       displayName: 'Init remote state'
-
-
