@@ -32,12 +32,13 @@ parameters:
 variables:
 - group: ARM-SUBSCRIPTION
 - name: teamname
+  value: devops
 - name: REMOTE_STATE_RESOURCE_GROUP
-  value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ parameters.environment }}${{ parameters.environment }}-rg"
+  value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ variables.teamname }}${{ parameters.environment }}-rg"
 - name: REMOTE_STATE_STORAGE_ACCOUNT
-  value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ parameters.environment }}${{ parameters.environment }}"
+  value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ variables.teamname }}${{ parameters.environment }}"
 - name: REMOTE_STATE_STORAGE_CONTAINER
-  value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ parameters.environment }}${{ parameters.environment }}"
+  value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ variables.teamname }}${{ parameters.environment }}"
 
 stages:
 
