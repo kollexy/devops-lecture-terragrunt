@@ -24,10 +24,10 @@ parameters:
     - appgateway  
   - name: environment
     displayName: 
-    default: QA
+    default: qa
     values:  
-    - DEV
-    - PROD      
+    - dev
+    - prod     
 
 variables:
 - group: ARM-SUBSCRIPTION
