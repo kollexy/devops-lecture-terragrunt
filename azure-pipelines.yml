@@ -37,7 +37,7 @@ variables:
 - name: REMOTE_STATE_STORAGE_ACCOUNT
   value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ parameters.environment }}${{ parameters.environment }}"
 - name: REMOTE_STATE_STORAGE_CONTAINER
-  value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ parameters.environment }}${{ parameters.environment }}_container"
+  value: "${{ parameters.REMOTE_STATE_LOCATION }}${{ parameters.environment }}${{ parameters.environment }}"
 
 stages:
 
